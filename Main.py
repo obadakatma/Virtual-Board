@@ -1,4 +1,5 @@
 import os
+import threading
 import time
 
 import cv2 as cv
@@ -34,6 +35,11 @@ cTime, pTime = 0, 0
 
 # capturing the video frame
 capture = cv.VideoCapture(0)
+# threading for better fps performance
+thread = threading.Thread(target=cv.VideoCapture, args=[0])
+thread.start()
+thread.join()
+# setting the size of frame
 capture.set(3, 1280)
 capture.set(4, 720)
 
