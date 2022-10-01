@@ -35,17 +35,17 @@ cTime, pTime = 0, 0
 
 # capturing the video frame
 capture = cv.VideoCapture(0)
-# threading for better fps performance
-thread = threading.Thread(target=cv.VideoCapture, args=[0])
-thread.start()
-thread.join()
+
 # setting the size of frame
 capture.set(3, 1280)
 capture.set(4, 720)
 
 # hand detection
 detector = Hand.handDetector(detectionCon=0.85)
-
+# threading for better fps performance
+thread = threading.Thread(target=Hand.handDetector)
+thread.start()
+thread.join()
 while True:
     _, frame = capture.read()
     frame = cv.flip(frame, 1)
